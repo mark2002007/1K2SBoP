@@ -1,0 +1,19 @@
+#include <iostream>
+using namespace std;
+int main() {
+	int n, t = 10;
+	bool tumb = true;
+	cout << "Enter n : "; cin >> n;
+	while (n > 0) {
+		if (n % 10 < t) {
+			t = n % 10;
+		}
+		else {
+			tumb = false;
+			break;
+		}
+		n /= 10;
+	}
+	(tumb) ? cout << "TRUE" : cout << "FALSE";
+	return 0;
+}
