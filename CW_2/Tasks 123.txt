@@ -1,0 +1,89 @@
+#include <iostream>
+#include <cstring>
+using namespace std;
+
+int ** CinArr(int n){ //Ввід двовимірного масиву
+	int** arr1 = new int*[n];
+	for (int i = 0; i < n; i++) {
+		arr1[i] = new int[n];
+		for (int j = 0; j < n; j++) {
+			cout << "Enter " << i + 1 << "x" << j + 1 << " pos : ";
+			cin >> arr1[i][j];
+		}
+	}
+	return arr1;
+}
+void CoutArr(int* arr, int size) { for (int i = 0; i < size; i++) (i == size - 1) ? cout << arr[i] << endl : cout << arr[i] << " "; } //Виввід одновимірного масиву
+void CSM(int** arr, int n) {//Вивід двовимірного масиву
+	for (int i = 0; i < n; i++) for (int j = 0; j < n; j++) (j == n - 1) ? cout << arr[i][j] << endl : cout << arr[i][j] << " ";
+}
+int* T1(int* arr,int size) {//Завдання 1
+	int* arr1 = new int[size]; 
+	int I = 0; //Показник на позицію
+	for (int i = 0; i < size; i++) if (arr[i] <= 0) { arr1[I] = arr[i]; I++; } // Заповнення arr1 елементами <= 0
+	for (int i = 0; i < size; i++) if (arr[i] > 0) { arr1[I] = arr[i]; I++; }// Заповнення arr1 елементами < 0
+	return arr1;
+}
+int T2(int **arr, int size) {//Завдання 2
+	int k = size;
+	bool block = true;
+	while (k >= 0) {
+		for (int i = 0; i < size - k + 1; i++) {//Зсув точки відліку по вертикалі
+			for (int j = 0; j < size - k + 1; j++) {//Зсув точки відліку по горизонталі
+				block = true;
+				for (int l = 0; l < k; l++) for (int m = 0; m < k; m++) if (arr[i+l][j+m] != 1) block = false; //Перевірка чи блок є одиничним( цикл l перебір блоку відносно точки відліку по вертикалі, m - горизонталі)
+				if (block == true) return k; //Якщо блок є - повернення розміру
+			}
+		}
+		k--; //Не знайшов блок КхК? - зменши блок перебору
+	}
+	return 0;
+}
+void T3(char* str) {//Завдання 3
+	int k; 
+	char* str1 = new char[strlen(str)]; //Створення допоміжної стрічки
+	k = -2; // Тут має бути ввід к( зсув на к позицій ) але cin >> по якійсь причині не працює(Можете переконатись самі)
+	
+	//cout << "Shift for string : ";
+	//cin >> k;
+
+	if (k > 0) {
+		for (int i = 0; i < strlen(str); i++) str1[(i + k) % strlen(str)] = str[i];
+	}
+	else if (k < 0) {
+		for (int i = 0; i < strlen(str); i++) (i + k < 0) ? str1[strlen(str) + (i + k)] = str[i] : str1[i + k] = str[i];
+	}
+	for (int i = 0; i < strlen(str); i++) str[i] = str1[i];
+}
+int main() {
+	//Task 1
+	//int size;
+	//cout << "Enter size of arr : "; cin >> size;
+	//int* arr = new int[size];
+	//for (int i = 0; i < size; i++) {
+	//	cout << "Enter " << i + 1 << "-th pos : ";
+	//	cin >> arr[i];
+	//}
+
+	//cout << "Before : ";
+	//CoutArr(arr, size);
+
+	//arr = T1(arr, size);
+
+	//cout << "After : ";
+	//CoutArr(arr, size);
+
+	//Task 2
+	//int n;
+	//cout << "Enter size of matrix(nxn): "; cin >> n;
+	//int** arr = CinArr(n);
+	//CSM(arr, n);
+	//cout << "Largest block of ones kxk, where k = " <<  T2(arr,n);
+	
+	//Task 3 
+	//char str[100];
+	//cout << "Enter string (till '.' and smaller then 100 symbols) : ";
+	//cin.get(str,100,'.');
+	//T3(str);
+	//cout<< "Shifted string : " << str;
+}
