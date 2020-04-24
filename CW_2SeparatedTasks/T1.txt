@@ -1,0 +1,35 @@
+#include <iostream>
+#include <cstring>
+using namespace std;
+void CoutArr(int* arr, int size) { for (int i = 0; i < size; i++) (i == size - 1) ? cout << arr[i] << endl : cout << arr[i] << " "; } //Виввід одновимірного масиву
+int* T1(int* arr, int size) {//Завдання 1
+	int* arr1 = new int[size];
+	int I = 0; //Показник на позицію
+	for (int i = 0; i < size; i++) if (arr[i] <= 0) { arr1[I] = arr[i]; I++; } // Заповнення arr1 елементами <= 0
+	for (int i = 0; i < size; i++) if (arr[i] > 0) { arr1[I] = arr[i]; I++; }// Заповнення arr1 елементами < 0
+	return arr1;
+}
+int main() {
+	//Task 1
+	/*
+	Examples:
+	-2,-1,0,1,2 -> -2,-1,0,1,2
+	1,-2,-1,0,2 -> -2,-1,0,1,2
+	1,-2,0,-8,5 -> -2,0,-8,1,5
+	*/
+	int size;
+	cout << "Enter size of arr : "; cin >> size;
+	int* arr = new int[size];
+	for (int i = 0; i < size; i++) {
+		cout << "Enter " << i + 1 << "-th pos : ";
+		cin >> arr[i];
+	}
+	cout << "Before : ";
+	CoutArr(arr, size);
+
+	arr = T1(arr, size);
+
+	cout << "After : ";
+	CoutArr(arr, size);
+	return 0;
+}

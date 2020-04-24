@@ -1,0 +1,34 @@
+#include <iostream>
+#include <cstring>
+using namespace std;
+
+void T3(char* str) {//Завдання 3
+	int k; 
+	char* str1 = new char[strlen(str)]; //Створення допоміжної стрічки
+	k = -2; // Тут має бути ввід к( зсув на к позицій ) але cin >> по якійсь причині не працює(Можете переконатись самі)
+	
+	//cout << "Shift for string : ";
+	//cin >> k;
+
+	if (k > 0) {
+		for (int i = 0; i < strlen(str); i++) str1[(i + k) % strlen(str)] = str[i];
+	}
+	else if (k < 0) {
+		for (int i = 0; i < strlen(str); i++) (i + k < 0) ? str1[strlen(str) + (i + k)] = str[i] : str1[i + k] = str[i];
+	}
+	for (int i = 0; i < strlen(str); i++) str[i] = str1[i];
+}
+int main() {
+	//Task 3 
+	/*Examples: abcdef:
+	k = 2: efabcd
+	k = -2: cdefab
+	*/
+	char str[100];
+	cout << "Enter string (till '.' and smaller then 100 symbols) : ";
+	cin.get(str,100,'.');
+	T3(str);
+	cout<< "Shifted string : " << str;
+
+	return 0;
+}
